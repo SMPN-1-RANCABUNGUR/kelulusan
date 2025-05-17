@@ -1,36 +1,30 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f5f5f5;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            -webkit-tap-highlight-color: transparent;
+            transition: background-color 0.5s;
         }
         
         .container {
             background-color: white;
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            width: 100%;
             max-width: 800px;
+            width: 100%;
             padding: 30px 20px;
             text-align: center;
             position: relative;
+            transition: all 0.5s;
         }
         
         .header {
@@ -44,7 +38,7 @@
         .logo {
             width: 80px;
             height: 80px;
-            margin-right: 15px;
+            margin-right: 20px;
         }
         
         .school-info {
@@ -52,14 +46,14 @@
         }
         
         .school-name {
-            font-size: clamp(20px, 5vw, 24px);
+            font-size: 24px;
             font-weight: bold;
             margin: 0;
             color: #2c3e50;
         }
         
         .year {
-            font-size: clamp(16px, 4vw, 18px);
+            font-size: 18px;
             color: #7f8c8d;
             margin: 5px 0;
         }
@@ -70,29 +64,28 @@
         
         input {
             padding: 12px 15px;
-            width: 100%;
-            max-width: 400px;
+            width: 80%;
+            max-width: 300px;
             border: 2px solid #3498db;
-            border-radius: 8px;
+            border-radius: 5px;
             font-size: 16px;
-            margin-bottom: 10px;
+            box-sizing: border-box;
         }
         
         button {
-            padding: 12px 25px;
+            padding: 12px 20px;
             background-color: #3498db;
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
             margin-top: 10px;
-            width: 100%;
-            max-width: 400px;
-            transition: background-color 0.3s;
+            width: 80%;
+            max-width: 300px;
         }
         
-        button:hover, button:active {
+        button:hover {
             background-color: #2980b9;
         }
         
@@ -112,26 +105,26 @@
         
         .student-info {
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             gap: 20px;
+            flex-wrap: wrap;
         }
         
         .student-details {
-            width: 100%;
+            flex: 2;
         }
         
         .qr-code {
+            flex: 1;
             text-align: center;
-            margin-top: 20px;
         }
         
         .status {
             font-weight: bold;
-            padding: 8px 15px;
+            padding: 5px 10px;
             border-radius: 5px;
             display: inline-block;
             margin-top: 10px;
-            font-size: 16px;
         }
         
         .passed {
@@ -147,7 +140,6 @@
         .title {
             color: #3498db;
             margin-bottom: 30px;
-            font-size: clamp(18px, 5vw, 22px);
         }
         
         .alert-popup,
@@ -162,8 +154,8 @@
             z-index: 1000;
             display: none;
             text-align: center;
-            max-width: 90%;
-            width: auto;
+            width: 80%;
+            max-width: 400px;
         }
         
         .alert-popup {
@@ -186,29 +178,26 @@
             height: 100%;
             background-color: white;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 9999;
+            z-index: 2000;
             display: none;
         }
         
-        .countdown-text {
-            font-size: clamp(60px, 20vw, 120px);
+        .countdown-number {
+            font-size: 5rem;
             font-weight: bold;
             color: #3498db;
+            margin-bottom: 20px;
+            animation: pulse 1s infinite;
+        }
+        
+        .preparing-text {
+            font-size: 1.5rem;
+            color: #2c3e50;
             text-align: center;
-            animation: pulse 1s infinite alternate;
-        }
-        
-        .back-button {
             margin-top: 20px;
-            background-color: #7f8c8d;
-            width: 100%;
-            max-width: 400px;
-        }
-        
-        .back-button:hover, .back-button:active {
-            background-color: #666;
         }
         
         @keyframes fadeIn {
@@ -222,17 +211,54 @@
         }
         
         @keyframes pulse {
-            from { transform: scale(1); opacity: 1; }
-            to { transform: scale(1.1); opacity: 0.8; }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
         }
         
-        @media (min-width: 600px) {
-            .student-info {
-                flex-direction: row;
+        .back-button {
+            margin-top: 20px;
+            background-color: #7f8c8d;
+            width: 80%;
+            max-width: 300px;
+        }
+        
+        .back-button:hover {
+            background-color: #666;
+        }
+        
+        @media screen and (max-width: 600px) {
+            .header {
+                flex-direction: column;
+                align-items: center;
             }
             
-            .qr-code {
-                margin-top: 0;
+            .logo {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+            
+            .student-info {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .student-details {
+                width: 100%;
+            }
+            
+            .qr-code img {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .countdown-number {
+                font-size: 4rem;
+            }
+            
+            .preparing-text {
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -249,12 +275,13 @@
         Data ditemukan
     </div>
     
-    <!-- Countdown overlay -->
+    <!-- Overlay countdown -->
     <div id="countdownOverlay" class="countdown-overlay">
-        <div id="countdownText" class="countdown-text">10</div>
+        <div id="countdownNumber" class="countdown-number">10</div>
+        <div class="preparing-text">Menyiapkan data...</div>
     </div>
 
-    <div class="container">
+    <div class="container" id="mainContainer">
         <div class="header">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/LOGO_KECIL_SMPN_1_RANCABUNGUR_4_CLEAR.png/250px-LOGO_KECIL_SMPN_1_RANCABUNGUR_4_CLEAR.png" alt="Logo Sekolah" class="logo">
             <div class="school-info">
@@ -266,7 +293,7 @@
         <h2 class="title">CEK STATUS KELULUSAN SISWA</h2>
         
         <div class="search-box">
-            <input type="text" id="nisnInput" placeholder="Masukkan NISN Siswa" inputmode="numeric">
+            <input type="text" id="nisnInput" placeholder="Masukkan NISN Siswa">
             <button onclick="checkGraduation()">Cek Status</button>
         </div>
         
@@ -274,13 +301,13 @@
             <div class="student-card">
                 <div class="student-info">
                     <div class="student-details">
-                        <h2 id="studentName" style="font-size: clamp(18px, 5vw, 22px);"></h2>
+                        <h2 id="studentName"></h2>
                         <p><strong>NISN:</strong> <span id="studentNISN"></span></p>
                         <p><strong>Kelas:</strong> <span id="studentClass"></span></p>
                         <p><strong>Status:</strong> <span id="studentStatus" class="status"></span></p>
                     </div>
                     <div class="qr-code">
-                        <img id="qrImage" src="" alt="QR Code" style="width: 150px; height: 150px;">
+                        <img id="qrImage" src="" alt="QR Code" width="120" height="120">
                         <p>Scan untuk verifikasi</p>
                     </div>
                 </div>
@@ -295,7 +322,7 @@
             // ... (data siswa tetap sama seperti sebelumnya)
             // Tetap pertahankan semua data siswa yang ada
             // Saya singkat di sini untuk menghemat ruang
-            { nisn: "0097194219", name: "ABDUL RIZQI SETIAWAN", class: "91", status: "NOT VERIFIED" },
+{ nisn: "0097194219", name: "ABDUL RIZQI SETIAWAN", class: "91", status: "NOT VERIFIED" },
 { nisn: "0106484085", name: "ADLYANSYAH", class: "91", status: "NOT VERIFIED" },
 { nisn: "0096937659", name: "AIRA NUR AFIFAH", class: "91", status: "NOT VERIFIED" },
 { nisn: "0094431534", name: "ALMIRA LUTFIANA PUTRI", class: "91", status: "NOT VERIFIED" },
@@ -888,86 +915,92 @@
             
             setTimeout(() => {
                 successPopup.style.display = 'none';
-            }, 4000);
+            }, 2000);
         }
 
         function startCountdown() {
             const countdownOverlay = document.getElementById('countdownOverlay');
-            const countdownText = document.getElementById('countdownText');
+            const countdownNumber = document.getElementById('countdownNumber');
+            const mainContainer = document.getElementById('mainContainer');
             
+            // Sembunyikan konten utama dan tampilkan overlay countdown
+            mainContainer.style.opacity = '0';
+            mainContainer.style.pointerEvents = 'none';
             countdownOverlay.style.display = 'flex';
+            
             let count = 10;
-            countdownText.textContent = count;
+            countdownNumber.textContent = count;
             
             countdownInterval = setInterval(() => {
                 count--;
-                countdownText.textContent = count;
+                countdownNumber.textContent = count;
                 
                 if (count <= 0) {
                     clearInterval(countdownInterval);
                     countdownOverlay.style.display = 'none';
+                    mainContainer.style.opacity = '1';
+                    mainContainer.style.pointerEvents = 'auto';
+                    showResult();
                 }
             }, 1000);
         }
 
+        function showResult() {
+            const nisn = document.getElementById('nisnInput').value;
+            const student = students.find(s => s.nisn === nisn);
+            const resultDiv = document.getElementById('result');
+            
+            document.getElementById('studentName').textContent = student.name;
+            document.getElementById('studentNISN').textContent = student.nisn;
+            document.getElementById('studentClass').textContent = student.class;
+            
+            const statusElement = document.getElementById('studentStatus');
+            statusElement.textContent = student.status;
+            statusElement.className = 'status ' + (student.status === 'Lulus' ? 'passed' : 'failed');
+            
+            // Generate QR code dengan data siswa
+            const qrData = `Nama: ${student.name}\nNISN: ${student.nisn}\nKelas: ${student.class}\nStatus: ${student.status}\nSekolah: SMPN 1 RANCABUNGUR\nTahun: 2025`;
+            document.getElementById('qrImage').src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrData)}`;
+            
+            resultDiv.style.display = 'block';
+            
+            // Scroll ke hasil
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+
         function resetForm() {
+            // Reset form dan sembunyikan hasil
             document.getElementById('nisnInput').value = '';
             document.getElementById('result').style.display = 'none';
             clearInterval(countdownInterval);
+            
+            // Fokuskan kembali ke input
             document.getElementById('nisnInput').focus();
         }
 
         function checkGraduation() {
-            const nisn = document.getElementById('nisnInput').value.trim();
-            const resultDiv = document.getElementById('result');
-            
-            if (!nisn) {
-                showAlert('Silakan masukkan NISN');
-                return;
-            }
-            
+            const nisn = document.getElementById('nisnInput').value;
             const student = students.find(s => s.nisn === nisn);
             
             if (student) {
                 showSuccess('Data ditemukan');
-                startCountdown();
                 
+                // Mulai countdown setelah 1 detik
                 setTimeout(() => {
-                    document.getElementById('studentName').textContent = student.name;
-                    document.getElementById('studentNISN').textContent = student.nisn;
-                    document.getElementById('studentClass').textContent = student.class;
-                    
-                    const statusElement = document.getElementById('studentStatus');
-                    statusElement.textContent = student.status;
-                    statusElement.className = 'status ' + (student.status === 'Lulus' ? 'passed' : 'failed');
-                    
-                    const qrData = `Nama: ${student.name}\nNISN: ${student.nisn}\nKelas: ${student.class}\nStatus: ${student.status}\nSekolah: SMPN 1 RANCABUNGUR\nTahun: 2025`;
-                    document.getElementById('qrImage').src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrData)}`;
-                    
-                    resultDiv.style.display = 'block';
-                    
-                    // Scroll ke hasil setelah ditampilkan
-                    setTimeout(() => {
-                        resultDiv.scrollIntoView({ behavior: 'smooth' });
-                    }, 100);
-                }, 10000);
+                    startCountdown();
+                }, 1000);
             } else {
                 showAlert('Data tidak ditemukan');
-                resultDiv.style.display = 'none';
+                document.getElementById('result').style.display = 'none';
                 clearInterval(countdownInterval);
             }
         }
         
-        // Event listener untuk tombol enter
+        // Tambahkan event listener untuk tombol enter
         document.getElementById('nisnInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 checkGraduation();
             }
-        });
-        
-        // Fokuskan input saat halaman dimuat
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('nisnInput').focus();
         });
     </script>
 </body>

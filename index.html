@@ -1,4 +1,181 @@
 <!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Countdown dan Pengumuman Kelulusan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { margin: 0; padding: 0; }
+        #countdownContainer { display: none; }
+        #indexContainer { display: none; }
+    </style>
+</head>
+<body>
+    <div id="countdownContainer">
+        <!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Pengumuman Kelulusan</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 800px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        h1 {
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            margin-bottom: 30px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .countdown {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .countdown-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            flex: 1;
+            min-width: 120px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .countdown-box:hover {
+            transform: translateY(-5px);
+        }
+        
+        .number {
+            font-size: clamp(2rem, 8vw, 4rem);
+            font-weight: bold;
+            margin: 0;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .label {
+            font-size: clamp(0.8rem, 3vw, 1.2rem);
+            margin-top: 5px;
+            opacity: 0.8;
+        }
+        
+        .message {
+            margin-top: 40px;
+            font-size: clamp(1rem, 4vw, 1.5rem);
+            opacity: 0.9;
+        }
+        
+        @media (max-width: 600px) {
+            .countdown-box {
+                min-width: calc(50% - 20px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Countdown Pengumuman Kelulusan</h1>
+        
+        <div class="countdown">
+            <div class="countdown-box">
+                <div class="number" id="days">00</div>
+                <div class="label">Hari</div>
+            </div>
+            
+            <div class="countdown-box">
+                <div class="number" id="hours">00</div>
+                <div class="label">Jam</div>
+            </div>
+            
+            <div class="countdown-box">
+                <div class="number" id="minutes">00</div>
+                <div class="label">Menit</div>
+            </div>
+            
+            <div class="countdown-box">
+                <div class="number" id="seconds">00</div>
+                <div class="label">Detik</div>
+            </div>
+        </div>
+        
+        <div class="message" id="message"></div>
+    </div>
+
+    <script>
+        function updateCountdown() {
+            const targetDate = new Date('June 2, 2025 00:00:01').getTime();
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+            
+            if (distance < 0) {
+                document.getElementById('message').innerHTML = "Pengumuman kelulusan telah tersedia! Selamat kepada semua yang lulus!";
+                document.getElementById('days').innerHTML = "00";
+                document.getElementById('hours').innerHTML = "00";
+                document.getElementById('minutes').innerHTML = "00";
+                document.getElementById('seconds').innerHTML = "00";
+                return;
+            }
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').innerHTML = days.toString().padStart(2, '0');
+            document.getElementById('hours').innerHTML = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').innerHTML = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').innerHTML = seconds.toString().padStart(2, '0');
+            
+            // Update pesan berdasarkan waktu yang tersisa
+            if (days > 4) {
+                document.getElementById('message').innerHTML = "SMPN 1 RANCABUNGUR 2025";
+            } else if (days > 3) {
+                document.getElementById('message').innerHTML = "SMPN 1 RANCABUNGUR 2025";
+            } else if (days > 2) {
+                document.getElementById('message').innerHTML = "SMPN 1 RANCABUNGUR 2025";
+            } else if (days > 0) {
+                document.getElementById('message').innerHTML = "SMPN 1 RANCABUNGUR 2025";
+            } else {
+                document.getElementById('message').innerHTML = "Hari ini adalah hari pengumuman! Semoga berhasil!";
+            }
+        }
+        
+        // Update countdown setiap detik
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
+    </div>
+    <div id="indexContainer">
+        <!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,7 +215,7 @@
         }
         
         .container {
-            background-color: white;
+            background-color: black;
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             max-width: 800px;
@@ -120,7 +297,7 @@
         }
         
         .student-card {
-            background-color: #f8f9fa;
+            background-color: #130a29;
             border-radius: 10px;
             padding: 20px;
             margin-top: 20px;
@@ -1064,6 +1241,29 @@ TAHUN: 2025`;
                 e.preventDefault();
             }
         });
+    </script>
+</body>
+</html>
+    </div>
+
+    <script>
+        const countdownContainer = document.getElementById("countdownContainer");
+        const indexContainer = document.getElementById("indexContainer");
+
+        function checkTimeAndSwitch() {
+            const targetDate = new Date("2025-06-02T00:00:01").getTime();
+            const now = new Date().getTime();
+            if (now >= targetDate) {
+                countdownContainer.style.display = "none";
+                indexContainer.style.display = "block";
+            } else {
+                countdownContainer.style.display = "block";
+                indexContainer.style.display = "none";
+            }
+        }
+
+        setInterval(checkTimeAndSwitch, 1000);
+        checkTimeAndSwitch();
     </script>
 </body>
 </html>
